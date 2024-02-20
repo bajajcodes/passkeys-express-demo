@@ -6,6 +6,7 @@ const path = require("path");
 const layouts = require("express-ejs-layouts");
 
 app.use(layouts);
+app.use(express.static(__dirname + "/public"));
 app.set("views", path.join(__dirname, "src/views"));
 app.set("layout", "layouts/application");
 app.set("view engine", "ejs");

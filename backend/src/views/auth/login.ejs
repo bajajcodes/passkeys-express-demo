@@ -1,0 +1,35 @@
+<div class="container">
+  <main class="centralising-wrapper">
+    <a href="/">
+      <img src="/images/banner.jpg" alt="Passkeys Banner" class="site-logo" />
+    </a>
+    <h1>Login</h1>
+
+    <section class="auth-form">
+      <form>
+        <label for="username">
+          <span class="input-label">username</span>
+          <span class="input-field">
+            <input
+              id="username"
+              name="username"
+              type="username"
+              autocomplete="username webauthn"
+              placeholder="Enter your username"
+              required
+              autofocus
+            />
+          </span>
+        </label>
+        <input type="submit" value="Login" />
+      </form>
+
+      <p class="help">
+        Don't have an account yet? <a href="/register">Register</a>
+      </p>
+    </section>
+  </main>
+</div>
+
+<script type="text/javascript" src="/scripts/base64url.js"></script>
+<script type="text/javascript" src="/scripts/assertion-login.js"></script>
