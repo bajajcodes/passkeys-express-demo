@@ -13,6 +13,17 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
   username String @unique
+  publickeys PublicKeyCredentials[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PublicKeyCredentials {
+  id Int @id @default(autoincrement())
+  publicKey String @unique
+  externalId String @unique
+  user User @relation(fields: [userId], references: [id])
+  userId Int @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
