@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node build/index.js",
+    "tsc": "tsc",
+    "dev": "ts-node-dev index.ts",
+    "lint": "eslint --ext .ts .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -21,7 +23,15 @@
     "pg": "^8.11.3"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/express-ejs-layouts": "^2.5.4",
+    "@types/node": "^20.11.19",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "eslint": "^8.56.0",
     "nodemon": "^3.0.3",
-    "prisma": "^5.9.1"
+    "prisma": "^5.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
   }
 }

@@ -10,7 +10,7 @@ services:
     volumes:
       - .:/usr/src/app
       - node_modules:/usr/src/app/node_modules
-    command: npx nodemon index.js
+    command: npx ts-node-dev index.ts
   db:
     image: postgres
     environment:
