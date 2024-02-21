@@ -49,7 +49,42 @@ class PassportService {
     });
   };
 
-  register = (user, id, publicKey, done) => {};
+  /**
+   * The id is used as externalId here, for the publicKeyCredentials record.
+   * Also the id will be used to idenitfy publicKeyCredentials.
+   */
+  register = (user, id, publicKey, done) => {
+    return prisma.$transaction(async (tx) => {
+      //create new user using username
+      // now i am getting to make sense id or externalId or handle  is id from userdevice to idenitfy user assocaiation with the domain (i guess)
+      const newUser = await tx.user.create({
+        data: {
+          username: user.username,
+          handle: user.id,
+        },
+      });
+
+      if (!newUser) {
+        return done(null, false, { message: "Could not create user. " });
+      }
+
+      //create new publicKeyCredentials from newUser.id, passed in id, and the passed-in publicKey
+
+      const newCredentials = await tx.publicKeyCredentials.create({
+        data: {
+          userId: newUser.id,
+          externalId: id,
+          publicKey: publicKey,
+        },
+      });
+
+      if (!newCredentials) {
+        return done(null, false, { message: "Could not create public key. " });
+      }
+
+      return done(null, newUser);
+    });
+  };
 }
 
 module.exports = { PassportService };
