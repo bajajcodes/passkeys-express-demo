@@ -3,9 +3,9 @@ WORKDIR /usr/src/app
 
 EXPOSE 3000
 
-CMD [ "npx", "nodemon", "ts-node-dev", "index.ts" ]
+CMD [ "npx", "nodemon", "ts-node-dev", "index.js" ]
 
-COPY package*.json /usr/src/app/
+COPY package*.json /usr/src/app/      
 RUN npm install
 
 COPY . /usr/src/app/
