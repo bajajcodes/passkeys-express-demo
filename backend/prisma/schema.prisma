@@ -13,6 +13,7 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
   username String @unique
+  handle Bytes @unique
   publickeys PublicKeyCredentials[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
