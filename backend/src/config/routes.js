@@ -32,5 +32,6 @@ router.post(
   auth.admitUser,
   auth.denyUser
 );
+router.post("/logout", auth.logout);
 
 module.exports = router;

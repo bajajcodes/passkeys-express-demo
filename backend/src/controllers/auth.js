@@ -43,6 +43,13 @@ class AuthController {
     if (cxx != 4) return next(error);
     res.json({ ok: false, destination: "/login" });
   };
+
+  logout = (req, res, next) => {
+    req.logout((err) => {
+      if (err) return next(err);
+      res.redirect("/");
+    });
+  };
 }
 
 module.exports = { AuthController };
