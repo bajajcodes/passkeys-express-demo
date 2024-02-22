@@ -1,5 +1,3 @@
-const { default: base64url } = require("base64url");
-
 class Register {
   async init(event) {
     //TODO: add ability to get challenge from the server

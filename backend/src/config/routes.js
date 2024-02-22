@@ -26,7 +26,7 @@ router.get("/", welcome, dashboard);
 router.get("/register", auth.register);
 router.post("/register/public-key/challenge", auth.createChallengeFrom(store));
 router.get("/login", auth.login);
-router.get(
+router.post(
   "/login/public-key",
   auth.passportCheck(),
   auth.admitUser,

@@ -74,7 +74,7 @@ class PassportService {
       // now i am getting to make sense id or externalId or handle  is id from userdevice to idenitfy user assocaiation with the domain (i guess)
       const newUser = await tx.user.create({
         data: {
-          username: user.username,
+          username: user.name,
           handle: user.id,
         },
       });
