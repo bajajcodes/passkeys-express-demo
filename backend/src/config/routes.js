@@ -15,7 +15,7 @@ const router = Router();
 //TODO: Avoid referencing unbound methods which may cause unintentional scoping of `this`.
 const { welcome } = new PagesController();
 const { dashboard } = new AdminController();
-const { register, login } = new AuthController();
+const auth = new AuthController();
 
 const passportService = new PassportService();
 const store = new SessionChallengeStore();
@@ -23,7 +23,14 @@ const store = new SessionChallengeStore();
 passportService.init(store);
 
 router.get("/", welcome, dashboard);
-router.get("/register", register);
-router.get("/login", login);
+router.get("/register", auth.register);
+router.post("/register/public-key/challenge", auth.createChallengeFrom(store));
+router.get("/login", auth.login);
+router.get(
+  "/login/public-key",
+  auth.passportCheck(),
+  auth.admitUser,
+  auth.denyUser
+);
 
 module.exports = router;

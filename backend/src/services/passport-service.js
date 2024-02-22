@@ -2,6 +2,7 @@ const passport = require("passport");
 const WebAuthnStrategy = require("passport-fido2-webauthn");
 const prisma = require("../db/helpers/init");
 
+//externalId is credentialId of the user.
 class PassportService {
   init(store) {
     // TODO: Add ability to configure passport to use webauthn strategy
