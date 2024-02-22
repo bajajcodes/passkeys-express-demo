@@ -6,6 +6,8 @@ const expressSession = require("express-session");
 const passport = require("passport");
 const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
 const prisma = require("./src/db/helpers/init");
+const multer = require("multer");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,6 +18,10 @@ const sessionStore = new PrismaSessionStore(prisma, {
   dbRecordIdFunction: undefined,
 });
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(multer().none());
+app.use(cookieParser());
 app.use(layouts);
 app.use(express.static(__dirname + "/public"));
 app.use(
