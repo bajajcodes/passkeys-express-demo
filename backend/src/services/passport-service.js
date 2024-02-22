@@ -7,12 +7,26 @@ class PassportService {
     // TODO: Add ability to configure passport to use webauthn strategy
     passport.use(this.useWebauthnStrategy(store));
     // TODO: Add ability to serialize user
+    passport.serializeUser(this.serialiseUserFn);
     // TODO: Add ability to deserialize user
+    passport.deserializeUser(this.deserialiseUserFn);
   }
 
-  useWebauthnStrategy(store) {
+  useWebauthnStrategy = (store) => {
     return new WebAuthnStrategy({ store }, this.verify, this.register);
-  }
+  };
+
+  serialiseUserFn = (user, done) => {
+    process.nextTick(() => {
+      return done(null, { id: user.id, email: user.email });
+    });
+  };
+
+  deserialiseUserFn = (user, done) => {
+    process.nextTick(() => {
+      return done(null, user);
+    });
+  };
 
   verify = (externalId, userHandle, done) => {
     return prisma.$transaction(async (tx) => {
