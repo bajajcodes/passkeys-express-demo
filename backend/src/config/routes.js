@@ -32,6 +32,7 @@ router.post(
   auth.admitUser,
   auth.denyUser
 );
+router.post("/login/public-key/challenge", auth.getChallengeFrom(store));
 router.post("/logout", auth.logout);
 
 module.exports = router;
