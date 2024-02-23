@@ -27,6 +27,15 @@ class AuthController {
     };
   };
 
+  getChallengeFrom = (store) => {
+    return (req, res, next) => {
+      store.challenge(req, (error, challenge) => {
+        if (error) return next(error);
+        res.json({ challenge: base64url.encode(challenge) });
+      });
+    };
+  };
+
   passportCheck = () => {
     return passport.authenticate("webauthn", {
       failureMessage: true,
@@ -38,8 +47,8 @@ class AuthController {
     res.json({ ok: true, destination: "/" });
   };
 
-  denyUser = (error, req, res, next) => {
-    const cxx = Math.floor(err.status / 100);
+  denyUser = (error, _, res, next) => {
+    const cxx = Math.floor(error.status / 100);
     if (cxx != 4) return next(error);
     res.json({ ok: false, destination: "/login" });
   };

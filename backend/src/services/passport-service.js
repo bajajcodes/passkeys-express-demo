@@ -45,7 +45,7 @@ class PassportService {
 
       const currentUser = await tx.user.findUnique({
         where: {
-          id: credentials.userId,
+          id: currentCredentials.userId,
         },
       });
 
